@@ -22,7 +22,7 @@ Use cases:
     - Personal and enterprise data storage.
 
 - Supporting small size:
-    - ...
+    - Ensuring small pieces of data that other parachain may use and want to make sure are store in every single node of storage hub.
 
 ## Capacity for modifying the information
 By this we mean whether we will have only immutable hash/value type or support mutable references.
