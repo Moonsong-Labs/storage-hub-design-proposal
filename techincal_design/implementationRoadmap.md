@@ -32,6 +32,7 @@
         - Potentially initiating an RFC to include a dedicated host function for optimized verification.
 	6. [Reading Access NFT Pallet](https://github.com/Moonsong-Labs/storage-hub-design-proposal/blob/add-technical-design/techincal_design/runtimeBreakdown.md#reading-access-control-nfts-pallet)
 	7.  [Governance - Referenda Pallet](https://github.com/Moonsong-Labs/storage-hub-design-proposal/blob/add-technical-design/techincal_design/runtimeBreakdown.md#referenda-pallet)
+    8. Extrinsics bechmarking
 
 2. [**BSP Client**](https://github.com/Moonsong-Labs/storage-hub-design-proposal/blob/add-technical-design/techincal_design/modulesBreakdown.md#file-transfer-module-p2p):
 	1. Receiving a file from task.
