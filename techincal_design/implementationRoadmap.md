@@ -49,15 +49,14 @@
     4. Monitor deleted files task.
     5. Receive a file from BSPs when assigned as new MSP task.
     6. File System indexing for accepting selection as new MSP
-4. **File Upload Utility**: rust task to listen to BSPs volunteering for a given file, connecting to them and sending file.
 
-5. **File Uploader Client**:
+4. **File Uploader Client**:
     - Task to monitor StorageHub's on-chain events and connect to MSP (when it accepts the request) and BSPs (when they volunteer). This task should be packed as a cargo package with asynchrnous tasks to launch from an async rust runtime like Tokio Runtime.
 
-6. [StorageHub XCM Pallet](https://github.com/Moonsong-Labs/storage-hub-design-proposal/blob/add-technical-design/techincal_design/runtimeBreakdown.md#xcm-pallet):
+5. [StorageHub XCM Pallet](https://github.com/Moonsong-Labs/storage-hub-design-proposal/blob/add-technical-design/techincal_design/runtimeBreakdown.md#xcm-pallet):
     - A pallet to be used by external parachains wanting to use StorageHub's services. This pallet would abstract the construction of XCM messages to request storage.
 
-7. MVP Example implementation of an MSP focusing on value proposition to be determined. Some alternatives include supplying CoreJam, NFTs cheap storage or general object storage.
+6. MVP Example implementation of an MSP focusing on value proposition to be determined. Some alternatives include supplying CoreJam, NFTs cheap storage or general object storage.
 
 
 ## Phase 2: Testing, Audit and Optimizations (4 months)
