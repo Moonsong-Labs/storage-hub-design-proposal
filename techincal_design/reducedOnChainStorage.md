@@ -5,6 +5,7 @@ This document outlines the approach to significantly reduce the on-chain storage
 - MSP: Main Storage Provider.
 - BSP: Backup Storage Provider.
 - SP: Storage Provider (refers to both Main and Backup).
+- Fingerprint: a cryptographic output that uniquely identifies the contents of a file, like a hash or a Merkle root. The file itself is identified by its location and that cannot change (moving the file is like deleting that one and creating another), but the content of the file can change, and therefore so its fingerprint
 
 ### Goals of the Design
 1. Have an on-chain storage that does not scale with the number of files, but with something smaller like the number Storage Providers. Assuming that there is only a 64-byte Blake2B hash on-chain per file, if the system reaches the 1 billion files mark, it would have a state of 64GB just for those hashes. That is without taking into consideration the storage keys for the Patricia Merkle Trie that is the state, any other pallet's storage, and not even counting storing states from previous blocks.
@@ -19,6 +20,7 @@ This document outlines the approach to significantly reduce the on-chain storage
 	1. The one with the longest common prefix.
 	2. If there are more than one with the longest common prefix, it is the closest numerically speaking.
 	For example, assuming 4 bit hashes, if the random hash requested is `0b0110`, and the node only has chunks with hashes `0b0100`, `0b0101` and `0b0111`, the closest is `0b0111` as it shares the prefix `0b011`. If instead it only has `0b0100` and `0b0101`, both with a shared prefix of `0b01`, the closest is `0b0101`, as it is at a numerical distance of 1, whereas `0b0100` is at a numerical distance of 2.
+	The possibility of ordering leafs and finding a "next existing" leaf is the reason why Merkle Patricia Tries are used over regular Merkle trees.
 
 	![fileMerklePatriciaTrie](diagrams/fileMerklePatriciaTrie.png)
 
@@ -29,7 +31,12 @@ For starters, the approach taken is varies in the case of BSPs and MSPs, as they
 ```
 This way, the only information that needs to be stored on-chain, is a mapping of `bucket-id` to the MSP that stores all the files in it. If a user wants to retrieve a file, it is assumed that it would know the path to it, so it can know to which bucket it belongs, and therefore know the MSP that is storing it. Afterwards, the user would have to check with that specific MSP the exact details of the retrieval mechanisms available. With this approach, for MSPs, the Storage Hub state would scale with the number of buckets.
 
-In the case of BSPs, the concept of buckets doesn't exist, and it is intended that each new file, no matter what bucket it belongs to, is assigned to a random set of BSPs. Put differently, files in a bucket are not stored by the same set of BSPs. Therefore, for BSPs, there would be a **Merkle Patricia forest root** for each BSP. The Merkle Patricia forest is understood as the Merkle Patricia Trie whose leafs are the Merkle roots of each file the BSP is storing. Under this design, for BSPs, the Storage Hub state would scale with the number of BSPs in the network.
+In the case of BSPs, the concept of buckets doesn't exist, and it is intended that each new file, no matter what bucket it belongs to, is assigned to a random set of BSPs. Put differently, files in a bucket are not stored by the same set of BSPs. Therefore, for BSPs, there would be a **Merkle Patricia forest root** for each BSP. The Merkle Patricia forest is understood as the Merkle Patricia Trie whose leafs are the hash of:
+- Fingerprint of the file (cryptographic content identifier, like a Merkle root of the file).
+- Location of the file.
+- Size of the file.
+
+All of them concatenated, and there is one for each file the BSP is storing. Under this design, for BSPs, the Storage Hub state would scale with the number of BSPs in the network.
 
 ## Requesting Proofs
 With the introduction of **buckets** for MSPs, and **Merkle Patricia forest roots** for BSPs, the runtime looses the ability to request a proof for a given file, to the Storage Provider that is supposed to be storing it. The following algorithm describes how the runtime would request storage proofs in this design, ensuring that eventually all storage proofs are requested, and in random order, without having any knowledge of the Merkle roots of each file. The algorithm is the same for buckets and Merkle Patricia forests, because buckets would also have a Merkle Patricia forest root linked to them, with the distinction that there can be multiple bucket "roots" for each MSP. So from here on, consider that the Merkle Patricia forest root can be the root linked to a bucket, or a BSP.

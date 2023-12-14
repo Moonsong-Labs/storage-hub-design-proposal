@@ -1,0 +1,25 @@
+File: file_example_DOCX_500kB.docx
+File Size: 551820 bytes
+Merkle Root: 0c5bd9abf45d58ddad91ed5a199e7b444dfadce7ba1f5d7d991d7f29651b9a75
+Execution Time: 4.19ms
+
+File: file_example_JPG_1MB.jpg
+File Size: 1042592 bytes
+Merkle Root: 2b6e93c96d906b306101e602767ba620c0145fec712bffa6dee49cf58872902d
+Execution Time: 4.67ms
+
+File: file_example_MOV_1.56GB.MOV
+File Size: 1561544916 bytes
+Merkle Root: 8353ba2bed5d9bb33d5c0aecf0d6860471a8efb04757f33c5b2c7a5ba6ad0a78
+Execution Time: 5488.18ms
+
+File: file_example_MP4_46.1MB.mp4
+File Size: 48347169 bytes
+Merkle Root: 27cd424459752067bfd806adb62c22da925622adde8453c95608ff1d9e813b42
+Execution Time: 168.93ms
+
+File: file_example_PNG_3MB.png
+File Size: 2964729 bytes
+Merkle Root: 3aca87fd047d5db740b9b9f20afe12e6f9b53e2185d62afe4a66eeb78fbe69f5
+Execution Time: 8.44ms
+
