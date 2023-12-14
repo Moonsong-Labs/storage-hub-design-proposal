@@ -1,6 +1,6 @@
 # StorageHub Implementation Roadmap
 
-## Phase 1: Development (8 months)
+## Phase 1: Development (Estimated duration: 8 months)
 
 ### Overview:
 - **Duration:** 8 months
@@ -60,7 +60,7 @@
 6. MVP Example implementation of an MSP focusing on value proposition to be determined. Some alternatives include supplying CoreJam, NFTs cheap storage or general object storage.
 
 
-## Phase 2: Testing, Audit and Optimizations (4 months)
+## Phase 2: Testing, Audit and Optimizations (Estimated duration: 4 months)
 
 ### Overview:
 - **Duration:** 4 months
