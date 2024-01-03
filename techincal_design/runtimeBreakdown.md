@@ -323,7 +323,7 @@ Every round, a set of randomly selected BSPs are given out a list of hashes in t
 5. There is also an extrinsic to set each of the **Config Values**, which must be executed with root origin.
 
 ### Inherents
-1. `generate_challenges`: randomly assign challenges for the next round, to which BSPs and MSPs have to respond in a
+1. `generate_challenges`: randomly assign challenges for the next round, to which BSPs and MSPs have to respond in a `ChallengeWindow` time.
 
 ### Storage
 1. `DataRate`: the current rate to pay for a unit of data to be stored over time by BSPs.
